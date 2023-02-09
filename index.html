@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script>
+      function generateRandomNumber(min, max, excludeMin, excludeMax) {
+        var random = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (excludeMin && excludeMax && random >= excludeMin && random <= excludeMax) {
+          return generateRandomNumber(min, max, excludeMin, excludeMax);
+        }
+        return random;
+      }
+
+      function onGenerateClick() {
+        var set1Min = parseInt(document.getElementById("set1Min").value);
+        var set1Max = parseInt(document.getElementById("set1Max").value);
+        var set1ExcludeMin = parseInt(document.getElementById("set1ExcludeMin").value);
+        var set1ExcludeMax = parseInt(document.getElementById("set1ExcludeMax").value);
+        var set1ExcludeChecked = document.getElementById("set1ExcludeChecked").checked;
+
+        var set2Min = parseInt(document.getElementById("set2Min").value);
+        var set2Max = parseInt(document.getElementById("set2Max").value);
+        var set2ExcludeMin = parseInt(document.getElementById("set2ExcludeMin").value);
+        var set2ExcludeMax = parseInt(document.getElementById("set2ExcludeMax").value);
+        var set2ExcludeChecked = document.getElementById("set2ExcludeChecked").checked;
+
+        var set3Min = parseInt(document.getElementById("set3Min").value);
+        var set3Max = parseInt(document.getElementById("set3Max").value);
+        var set3ExcludeMin = parseInt(document.getElementById("set3ExcludeMin").value);
+        var set3ExcludeMax = parseInt(document.getElementById("set3ExcludeMax").value);
+        var set3ExcludeChecked = document.getElementById("set3ExcludeChecked").checked;
+
+        var set1 = generateRandomNumber(set1Min, set1Max, set1ExcludeChecked ? set1ExcludeMin : undefined, set1ExcludeChecked ? set1ExcludeMax : undefined);
+        var set2 = generateRandomNumber(set2Min, set2Max, set2ExcludeChecked ? set2ExcludeMin : undefined, set2ExcludeChecked ? set2ExcludeMax : undefined);
+        var set3 = generateRandomNumber(set3Min, set3Max, set3ExcludeChecked ? set3ExcludeMin : undefined, set3ExcludeChecked ? set3ExcludeMax : undefined);
+
+        document.getElementById("result").innerHTML = "Ispitno pitanje 1: " + set1 + "<br>Ispitno pitanje 2: " + set2 + "<br>Ispitno pitanje 3: " + set3;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Ispitno pitanje 1</h2>
+    Minimum: <input type="number" id="set1Min">
+    Maksimum: <input type="number" id="set1Max">
+    <br><br>
+    Isključi raspon: <input type="checkbox" id="set1ExcludeChecked" onclick="document.getElementById('set1ExcludeRange').style.display = this.checked ? 'block' : 'none'">
+    <div id="set1ExcludeRange" style="display: none">
+      od: <input type="number" id="set1ExcludeMin">
+      do: <input type="number" id="set1ExcludeMax">
+    </div>
+
+    <h2>Ispitno pitanje 2</h2>
+    Minimum: <input type="number" id="set2Min">
+    Maksimum: <input type="number" id="set2Max">
+    <br><br>
+    Isključi raspon: <input type="checkbox" id="set2ExcludeChecked" onclick="document.getElementById('set2ExcludeRange').style.display = this.checked ? 'block' : 'none'">
+    <div id="set2ExcludeRange" style="display: none">
+      od: <input type="number" id="set2ExcludeMin">
+      do: <input type="number" id="set2ExcludeMax">
+    </div>
+
+    <h2>Ispitno pitanje 3</h2>
+    Minimum: <input type="number" id="set3Min">
+    Maksimum: <input type="number" id="set3Max">
+    <br><br>
+    Isključi raspon: <input type="checkbox" id="set3ExcludeChecked" onclick="document.getElementById('set3ExcludeRange').style.display = this.checked ? 'block' : 'none'">
+    <div id="set3ExcludeRange" style="display: none">
+      od: <input type="number" id="set3ExcludeMin">
+      do: <input type="number" id="set3ExcludeMax">
+    </div>
+
+    <br><br>
+    <button onclick="onGenerateClick()">Izvlačenje</button>
+
+    <br><br>
+    <div id="result"></div>
+  </body>
+</html>
